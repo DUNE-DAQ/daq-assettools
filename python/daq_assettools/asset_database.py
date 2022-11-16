@@ -26,7 +26,7 @@ class Database(object):
         create_new = False
         if not os.path.exists(db_file):
             create_new = True
-            if not os.access('/path/to/folder', os.W_OK):
+            if not os.access(os.path.dirname(db_file), os.W_OK):
                 print(f"ERROR: {db_file} is not writable.")
         self.conn = sqlite3.connect(db_file)
         self.cursor = self.conn.cursor()
