@@ -23,7 +23,8 @@ Files listed in this [spreadsheet](https://docs.google.com/spreadsheets/d/1oDYe1
 
 Examples:
 - `assets-list --subsystem readout`
-- `assets-list -c dc74fe934cfb603d74ab6e54a0af7980`: list single file matching the MD5 file checksum.
+- `assets-list -c dc74fe934cfb603d74ab6e54a0af7980`: list single file matching the MD5 file checksum;
+- `assets-list -c dc74fe934cfb603d74ab6e54a0af7980 | awk '{print $NF}'`: get the file path only;
 - `assets-list --subsystem readout --format binary --status valid --print-metadata`
 
 ```
