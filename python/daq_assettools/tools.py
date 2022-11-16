@@ -30,6 +30,8 @@ def make_qdict(pargs):
         qdict['label'] = pargs.label
     if pargs.status is not None:
         qdict['status'] = pargs.status
+    if pargs.format is not None:
+        qdict['format'] = pargs.format
     if pargs.description is not None:
         qdict['description'] = pargs.description
     if pargs.checksum is not None:
