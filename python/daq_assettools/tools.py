@@ -51,7 +51,7 @@ def get_assets():
     files = asset_db.get_files(qdict)
     root_dir = os.path.dirname(asset_db.database_file)
     for i in files:
-        print("{:<15} {:<15} {:<15} {}/{}/{}".format(i['subsystem'], i['label'],
+    print("{:<15} {:<15} {:<15} {:<15} {}/{}/{}".format(i['checksum'], i['subsystem'], i['label'],
                                                      i['status'], root_dir,
                                                      i['path'], i['name']))
         if args.print_metadata:
