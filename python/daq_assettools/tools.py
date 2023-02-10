@@ -2,6 +2,7 @@ from daq_assettools.asset_file import AssetFile
 from daq_assettools.asset_database import Database
 import json
 import os
+import shutil
 
 import argparse
 
@@ -44,19 +45,39 @@ def make_qdict(pargs):
 def get_assets():
     parser = common_parser()
     parser.add_argument('-p', '--print-metadata', action='store_true', help="print full metadata")
+    parser.add_argument('--copy-to', help="path to the directory where asset files will be copied to.")
     args = parser.parse_args()
 
     asset_db = Database(args.db_file)
     qdict = make_qdict(args)
+    if len(qdict) == 0:
+        print("Error: at least one metadata field is required. Use '-h' for the helper.")
+        return
+    if args.copy_to is not None:
+        if not os.path.isdir(args.copy_to):
+            print(f"Error: the destination path '{args.copy_to}' does not exist.")
+            return
     files = asset_db.get_files(qdict)
     root_dir = os.path.dirname(asset_db.database_file)
+    if len(files) >0:
+        print("{:<32} {:<15} {:<15} {:<15} {}".format('checksum', 'subsystem', 'label',
+                                                            'status', 'file_path'))
+    else:
+        print("No asset files matched the query.")
+        return
     for i in files:
-    print("{:<15} {:<15} {:<15} {:<15} {}/{}/{}".format(i['checksum'], i['subsystem'], i['label'],
+        print("{:<32} {:<15} {:<15} {:<15} {}/{}/{}".format(i['checksum'], i['subsystem'], i['label'],
                                                      i['status'], root_dir,
                                                      i['path'], i['name']))
         if args.print_metadata:
             print("----------- File metadata ---------------")
             print(json.dumps(i, indent=4))
+        if args.copy_to is not None:
+            new_filename = os.path.splitext(i['name'])[0] + '-' + i['checksum'][:7] + os.path.splitext(i['name'])[1]
+            dst = os.path.join(args.copy_to, new_filename)
+            src = f"{root_dir}/{i['path']}/{i['name']}"
+            shutil.copy2(src, dst)
+            print(f"---- copied to {dst}\n")
     return
 
 
@@ -66,6 +87,9 @@ def update_assets():
     args = parser.parse_args()
     asset_db = Database(args.db_file)
     qdict = make_qdict(args)
+    if len(qdict) == 0:
+        print("Error: at least one metadata field is required. Use '-h' for the helper.")
+        return
     change_dict = json.loads(args.json_string)
     asset_db.update_files(qdict, change_dict)
     return
@@ -75,6 +99,9 @@ def retire_assets():
     args = parser.parse_args()
     asset_db = Database(args.db_file)
     qdict = make_qdict(args)
+    if len(qdict) == 0:
+        print("Error: at least one metadata field is required. Use '-h' for the helper.")
+        return
     asset_db.retire_files(qdict)
     return
 
