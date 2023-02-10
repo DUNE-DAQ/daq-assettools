@@ -15,7 +15,7 @@ Files listed in this [spreadsheet](https://docs.google.com/spreadsheets/d/1oDYe1
 
 ### Installation
 
-`pip install git+https://github.com/DUNE-DAQ/daq-assettools@v1.0.0#egg=daq-assettools`
+`pip install git+https://github.com/DUNE-DAQ/daq-assettools@v1.10.0#egg=daq-assettools # Change the version to the desired version.`
 
 ## How to get path to asset files
 
