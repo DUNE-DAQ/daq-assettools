@@ -23,7 +23,9 @@ Files listed in this [spreadsheet](https://docs.google.com/spreadsheets/d/1oDYe1
 
 Examples:
 - `assets-list --subsystem readout`
+- `assets-list --subsystem readout --copy-to ./`: list files of `readout` subsystem, and copy them to the current directory. The copied file will be renamed as `file-dc74fe9.ext`, assuming its original file name is `file.ext`; 
 - `assets-list -c dc74fe934cfb603d74ab6e54a0af7980`: list single file matching the MD5 file checksum;
+- `assets-list -c dc74fe934cfb603d74ab6e54a0af7980 --copy-to ./`: list single file matching the MD5 file checksum and copy the file to the current directory;
 - `assets-list -c dc74fe934cfb603d74ab6e54a0af7980 | awk '{print $NF}'`: get the file path only;
 - `assets-list --subsystem readout --format binary --status valid --print-metadata`
 
@@ -33,7 +35,7 @@ usage: assets-list [-h] [--db-file DB_FILE] [-n NAME]
                    [-f {binary,text}]
                    [--status {valid,expired,new_version_available}]
                    [--description DESCRIPTION] [--replica-uri REPLICA_URI]
-                   [-p]
+                   [-p] [--copy-to COPY_TO]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -56,6 +58,7 @@ optional arguments:
   --replica-uri REPLICA_URI
                         replica URI (default: None)
   -p, --print-metadata  print full metadata (default: False)
+  --copy-to COPY_TO     path to the directory where asset files will be copied to. (default: None)
 
 ```
 
