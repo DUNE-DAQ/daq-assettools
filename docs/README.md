@@ -27,7 +27,7 @@ Examples:
 - `assets-list --subsystem readout --copy-to ./`: list files of `readout` subsystem, and copy them to the current directory. The copied file will be renamed as `file-<short_checksum>.ext`, assuming its original file name is `file.ext`; 
 - `assets-list -c dc74fe934cfb603d74ab6e54a0af7980`: list single file matching the MD5 file checksum;
 - `assets-list -c dc74fe934cfb603d74ab6e54a0af7980 --copy-to ./`: list single file matching the MD5 file checksum and copy the file to the current directory;
-- `assets-list -c dc74fe934cfb603d74ab6e54a0af7980 | awk '{print $NF}'`: get the file path only;
+- `assets-list -c dc74fe934cfb603d74ab6e54a0af7980 | tail -n +2| awk '{print $NF}'`: get the file path only;
 - `assets-list --subsystem readout --format binary --status valid --print-metadata`
 
 ```
