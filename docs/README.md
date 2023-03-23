@@ -228,6 +228,10 @@ $ assets-add -s /nfs/home/glehmann/tdeframes.bin --db-file ./dunedaq-asset-db.sq
 
 $ assets-update --db-file ./dunedaq-asset-db.sqlite -c a0ddae8343e82ba1a3668c5aea20f3d2 --json-string '{"status": "expired"}'
 
+## This is equivalent to the line below
+
+$ assets-retire --db-file ./dunedaq-asset-db.sqlite -c a0ddae8343e82ba1a3668c5aea20f3d2
+
 ```
 
 #### Publish changes to cvmfs
