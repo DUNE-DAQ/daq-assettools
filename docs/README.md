@@ -1,5 +1,7 @@
 # DAQ Asset Tools
 
+## Overview
+
 DAQ asset files are stored under a 3-level hashed directory in `/cvmfs/dunedaq.opensciencegrid.org/assets/files`. Each asset file has an associated json file with its metadata under the same directory.
 
 There is a SQLite database file (`dunedaq-asset-db.sqlite`) under `/cvmfs/dunedaq.opensciencegrid.org/assets`. Metadata of the files are also stored in this database file.
@@ -13,17 +15,16 @@ This repository contains a set of tools to manage these DAQ asset files, availab
 
 Each command has a `-h` option which will tell you how to use it in detail; some of the highlights are covered in this document. 
 
-Files listed in this [spreadsheet](https://docs.google.com/spreadsheets/d/1oDYe1eEqJhkY0DTd6mfpLw9ou7TqBCaDEgTo0qqVmqY/edit#gid=0) are being catalogued. When developers and testers add new files, they should add new entries to the spreadsheet and let Software Coordination team to catalog and publish the file. Using Kurt's example (row 38) to see what fields to fill fin. 
+Files which are part of our assets are catalogued in this [spreadsheet](https://docs.google.com/spreadsheets/d/1oDYe1eEqJhkY0DTd6mfpLw9ou7TqBCaDEgTo0qqVmqY/edit#gid=0), where they provide info to users about each asset. When developers and testers want a new asset, they should add a corresponding line to the spreadsheet and ask the Software Coordination team to publish the file to `cvmfs`. Use Kurt's example (row 38) to see what fields to fill in. 
 
 ## How to see which asset files are available
 
-`assets-list` is the tool for this. It's a flexible tool; see `assets-list -h` for all available options, but here are some examples:
+`assets-list` is the tool for this. It's a flexible tool; see `assets-list -h` for all available options. Here are some examples:
 
 - `assets-list --subsystem readout`
 - `assets-list --subsystem readout --copy-to ./`: list files of `readout` subsystem, and copy them to the current directory. The copied file will be renamed as `file-<short_checksum>.ext`, assuming its original file name is `file.ext` 
 - `assets-list -c dc74fe934cfb603d74ab6e54a0af7980`: list single file matching the MD5 file checksum
 - `assets-list -c dc74fe934cfb603d74ab6e54a0af7980 --copy-to ./`: list single file matching the MD5 file checksum and copy the file to the current directory
-- `assets-list -c dc74fe934cfb603d74ab6e54a0af7980 | tail -n +2| awk '{print $NF}'`: get the file path only
 - `assets-list --subsystem readout --format binary --status valid --print-metadata`
 
 ## How to add, update, and retire asset files
