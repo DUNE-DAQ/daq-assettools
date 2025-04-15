@@ -81,7 +81,9 @@ rsync -vlprt /cvmfs/dunedaq.opensciencegrid.org/assets .
 ## Adding a new file
 
 cd ./assets
-assets-add -s /nfs/home/glehmann/tdeframes.bin --db-file ./dunedaq-asset-db.sqlite -n tdeframes.bin -f binary --status valid --subsystem readout --label TDE16 --description "ProtoWIB frames converted to TDE16 frames, using the original frames.bin file, and the file converter from rawdatautils"
+
+# Note that the name, label and description here are just given as examples
+assets-add -s <name of file to add as asset> --db-file ./dunedaq-asset-db.sqlite -n tdeframes.bin -f binary --status valid --subsystem readout --label TDE16 --description "ProtoWIB frames converted to TDE16 frames, using the original frames.bin file, and the file converter from rawdatautils"
 
 ## Retiring a file, referring to it by its hash
 
