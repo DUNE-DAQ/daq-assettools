@@ -4,6 +4,7 @@ import json
 import os
 import hashlib
 import shutil
+import stat
 import datetime
 import sys
 
@@ -45,6 +46,10 @@ class AssetFile(object):
             self.md["replica_uri"] = f"{hostname}:{self.src}"
         return
 
+    def add_universal_read_permission(self, filename):
+        file_permission = os.stat(filename).st_mode
+        file_permission = file_permission | stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH
+        os.chmod(filename, file_permission)
 
     def copy_to_hash_dir(self):
         src = os.path.abspath(self.src)
@@ -55,9 +60,19 @@ class AssetFile(object):
             print(f"INFO: A file with name: {fname} already exists at {dest_path}")
             print(f"INFO: Rename {fname} to {self.md['name']}")
             self.copy_to_hash_dir()
+
+        # Make the path for the file and make sure everyone can access it
         if not os.path.exists(self.md['path']):
             os.makedirs(self.md['path'])
+            subdirs=self.md['path'].split("/")
+            currdir=os.getcwd()
+            for subdir in subdirs:
+                os.chmod(subdir, 0o755)
+                os.chdir(subdir)
+            os.chdir(currdir)
         shutil.copy(src, dest_path)
+
+        self.add_universal_read_permission(dest_path)
         self.write_md_json()
         return
 
@@ -66,4 +81,5 @@ class AssetFile(object):
         with open(md_json_file, 'w') as mf:
             json.dump(self.md, mf, indent=4)
             mf.write('\n')
+        self.add_universal_read_permission(md_json_file)
         return
