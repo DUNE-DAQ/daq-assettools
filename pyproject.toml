@@ -1,0 +1,23 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=61.0"]
+
+[project]
+name = "daq_assettools"
+description = "Tools to store binary files on cvmfs"
+version = "1.1.0"
+readme = "docs/README.md"
+requires-python = ">=3.6"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+integrationtest = ["*"]
+
+[project.scripts]
+assets-list = "daq_assettools.tools:get_assets"
+assets-update = "daq_assettools.tools:update_assets"
+assets-retire = "daq_assettools.tools:retire_assets"
+assets-add = "daq_assettools.tools:add_assets"
