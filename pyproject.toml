@@ -14,7 +14,7 @@ dependencies = []
 where = ["src"]
 
 [tool.setuptools.package-data]
-integrationtest = ["*"]
+"*" = ["*"]
 
 [project.scripts]
 assets-list = "daq_assettools.tools:get_assets"
