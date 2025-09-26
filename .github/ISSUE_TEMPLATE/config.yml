@@ -21,8 +21,16 @@ body:
     id: location
     attributes:
       label: Location of the file
-      description: Provide a 
-      placeholder: ex. Sample TDE Ethernet data generated from run 39324 at NP02
+      description: Provide the absolute path to the asset file, including the node name. Make sure it's readable by others so we can copy it.
+      placeholder: ex. daq.fnal.gov:/home/nfs/user/my_asset_file.bin
+    validations:
+      required: true
+  - type: input
+    id: size
+    attributes:
+      label: Number and size of file(s)
+      description: Provide the number of asset files and their sizes.
+      placeholder: ex. 4 files, "wibeth-frames-X.bin". Each 232KB. X is from 0-3
     validations:
       required: true
   - type: dropdown
@@ -36,16 +44,8 @@ body:
     validations:
       required: true
   - type: textarea
-    id: logs
+    id: notes
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com). 
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+      label: Notes
+      description: Tell us why this file is useful.
+      placeholder: Used for testing PDS TP generation in emulated-data systems.
