@@ -43,6 +43,14 @@ body:
         - readout
     validations:
       required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: File format
+      description: Provide the format of the asset file.
+      options:
+        - binary
+        - text
   - type: textarea
     id: notes
     attributes:
