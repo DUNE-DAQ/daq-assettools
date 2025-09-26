@@ -1,0 +1,51 @@
+name: Request to add a DAQ asset file
+description: File a request to add an asset file to the dunedaq.opensciencegrid.org area on cvmfs.
+title: "[Add Asset]: "
+#labels: ["bug", "triage"]
+assignees:
+  - andrewmogan
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill all of the fields below so that we can fulfill your request.
+  - type: input
+    id: description
+    attributes:
+      label: Description of the asset file
+      description: Provide a brief description of the asset file.
+      placeholder: ex. Sample TDE Ethernet data generated from run 39324 at NP02
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location of the file
+      description: Provide a 
+      placeholder: ex. Sample TDE Ethernet data generated from run 39324 at NP02
+    validations:
+      required: true
+  - type: dropdown
+    id: subsystem
+    attributes:
+      label: Subsystem
+      description: What subsystem does this asset correspond to?
+      options:
+        - trigger
+        - readout
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com). 
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
