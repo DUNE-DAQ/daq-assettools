@@ -12,7 +12,7 @@ body:
     id: description
     attributes:
       label: Description of the asset file
-      description: Provide a brief description of the asset file.
+      description: Provide a 1-2 sentence description of the asset file, including the source of the data in the file (e.g., DAPHNE), if applicable.
       placeholder: Sample TDE Ethernet data generated from run 39324 at NP02.
     validations:
       required: true
@@ -25,10 +25,29 @@ body:
     validations:
       required: true
   - type: input
+    id: creator_name
+    attributes:
+      label: Name of the file creator
+      description: Provide the name of the person who created the file.
+  - type: dropdown
+    id: data_or_mc
+    attributes:
+      label: Data or MC
+      description: Was this file generated using real detector data, or simulation (i.e., Monte Carlo)?
+      options:
+        - Data
+        - Monte Carlo
+  - type: input
+    id: run_number
+    attributes:
+      label: Run number
+      description: If applicable, provide the run number from which the data in the file was taken.
+      placeholder: 12345
+  - type: input
     id: size
     attributes:
       label: Number and size of file(s)
-      description: Provide the number of asset files and their sizes.
+      description: "Provide the number of asset files and their sizes. \nNote that asset files shouldn’t exceed more than a couple hundred MB in size; cvmfs responds badly to files larger than that."
       placeholder: 4 files, each 232 KB
     validations:
       required: true
