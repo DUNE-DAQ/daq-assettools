@@ -37,6 +37,8 @@ body:
       options:
         - Data
         - Monte Carlo
+    validations:
+      required: true
   - type: input
     id: run_number
     attributes:
@@ -47,7 +49,7 @@ body:
     id: size
     attributes:
       label: Number and size of file(s)
-      description: Provide the number of asset files and their sizes. \nNote that asset files shouldn’t exceed more than a couple hundred MB in size; cvmfs responds badly to files larger than that.
+      description: Provide the number of asset files and their sizes. Note that asset files shouldn’t exceed more than a couple hundred MB in size; cvmfs responds badly to files larger than that.
       placeholder: 4 files, each 232 KB
     validations:
       required: true
