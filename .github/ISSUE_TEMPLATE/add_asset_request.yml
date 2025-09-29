@@ -42,7 +42,7 @@ body:
     attributes:
       label: Run number
       description: If applicable, provide the run number from which the data in the file was taken.
-      placeholder: 12345
+      placeholder: "12345"
   - type: input
     id: size
     attributes:
