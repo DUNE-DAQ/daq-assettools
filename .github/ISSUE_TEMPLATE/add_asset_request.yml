@@ -16,6 +16,16 @@ body:
       placeholder: Sample TDE Ethernet data generated from run 39324 at NP02.
     validations:
       required: true
+  - type: dropdown
+    id: label
+    attributes:
+      label: File label
+      description: File label
+      options:
+        - WIBEth
+        - TDEEth
+        - DAPHNE
+        - Other (please specify in the notes at the bottom of this form)
   - type: input
     id: location
     attributes:
