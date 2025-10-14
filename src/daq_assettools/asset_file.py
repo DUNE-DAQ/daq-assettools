@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
+import datetime
+import hashlib
 import json
 import os
-import hashlib
 import shutil
 import stat
-import datetime
 import sys
 
 
@@ -24,11 +24,10 @@ def calc_file_checksum_md5(file_name):
 
 
 def get_hash_dir(hash_md5):
-    hash_path = '/'.join(hash_md5[0:3])
-    return hash_path
+    return '/'.join(hash_md5[0:3])
 
 
-class AssetFile(object):
+class AssetFile:
     def __init__(self, md, src=""):
         self.md = md
         if src == "" and "name" in md and "path" in md:

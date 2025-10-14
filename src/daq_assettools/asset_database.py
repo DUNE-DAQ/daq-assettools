@@ -1,26 +1,27 @@
 #!/usr/bin/env python
 
+import datetime
 import os
 import sqlite3
-import datetime
+from typing import ClassVar
+
 from daq_assettools.asset_file import AssetFile
-import json
 
 
 #####################
 # file metadata table
 #####################
-class Database(object):
-    table = "dunedaq_assets"
-    columns = ['file_id', 'name'  , 'subsystem', 'label',
+class Database:
+    table: ClassVar[str] = "dunedaq_assets"
+    columns: ClassVar[list[str]] = ['file_id', 'name'  , 'subsystem', 'label',
                'path', 'checksum',  'size',
                'format', 'status', 'description',
                'catalog_ts', 'update_ts','replica_uri']
-    columns_type = [ 'INTEGER PRIMARY KEY', 'TEXT NOT NULL', 'TEXT NOT NULL',
+    columns_type: ClassVar[list[str]] = [ 'INTEGER PRIMARY KEY', 'TEXT NOT NULL', 'TEXT NOT NULL',
                     'TEXT NOT NULL', 'TEXT NOT NULL', 'TEXT', 'INTEGER',
                     'TEXT', 'TEXT', 'TEXT',
                     'TEXT', 'TEXT', 'TEXT' ]
-    status = ['valid', 'new version available', 'expired']
+    status: ClassVar[list[str]] = ['valid', 'new version available', 'expired']
     def __init__(self, db_file):
         self.database_file = os.path.abspath(db_file)
         create_new = False
@@ -61,7 +62,7 @@ class Database(object):
                 ivalue = asset_file.md[i]
             else:
                 ivalue = None
-            row_value = row_value + (ivalue, )
+            row_value = (*row_value, ivalue)
         self.insert(row_value)
         asset_file.copy_to_hash_dir()
         print(f"INFO: cataloged {asset_file.md['path']}/{asset_file.md['name']}")
@@ -117,8 +118,8 @@ class Database(object):
         return files_md
 
     def create_table(self):
-        sql_query = ''' SELECT name FROM sqlite_master WHERE type='table'
-        AND name='{}' '''.format(self.table)
+        sql_query = f''' SELECT name FROM sqlite_master WHERE type='table'
+        AND name='{self.table}' '''
         all_rows = self.query(sql_query)
         table_exist = False
         columns = []
@@ -138,7 +139,7 @@ class Database(object):
             self.conn.commit()
             print("created table")
         else:
-            qout = "Error when creating table {} in database ".format(self.table)
+            qout = f"Error when creating table {self.table} in database "
             qout += " -- table already exists."
             print(qout)
         return
@@ -148,8 +149,7 @@ class Database(object):
 
     def query(self, query):
         self.cursor.execute(query)
-        rows = self.cursor.fetchall()
-        return rows
+        return self.cursor.fetchall() # i.e., return rows
 
     def insert(self, row_value):
         self.cursor.execute('''INSERT INTO {}({}) VALUES ({})'''.format(
