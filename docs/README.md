@@ -15,7 +15,7 @@ This repository contains a set of tools to manage these DAQ asset files, availab
 
 Each command has a `-h` option which will tell you how to use it in detail; some of the highlights are covered in this document. 
 
-Files which are part of our assets are catalogued in this [spreadsheet](https://docs.google.com/spreadsheets/d/1oDYe1eEqJhkY0DTd6mfpLw9ou7TqBCaDEgTo0qqVmqY/edit#gid=0), where they provide info to users about each asset. When developers and testers want a new asset, they should add a corresponding line to the spreadsheet and ask the Software Coordination team to publish the file to `cvmfs`. Use Kurt's example (row 38) to see what fields to fill in.
+Files which are part of our assets are catalogued in this [spreadsheet](https://docs.google.com/spreadsheets/d/1oDYe1eEqJhkY0DTd6mfpLw9ou7TqBCaDEgTo0qqVmqY/edit#gid=0), where they provide info to users about each asset. When developers and testers want a new asset, they should open an issue in this repository and select the "Request to add a DAQ asset file" form. The Software Coordination team will then publish the file to `cvmfs`. 
 
 Note that asset files shouldn't exceed more than a couple hundred MB in size; cvmfs responds badly to files larger than that.
 
