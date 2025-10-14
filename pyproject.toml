@@ -21,3 +21,31 @@ assets-list = "daq_assettools.tools:get_assets"
 assets-update = "daq_assettools.tools:update_assets"
 assets-retire = "daq_assettools.tools:retire_assets"
 assets-add = "daq_assettools.tools:add_assets"
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.pytest.ini_options]
+addopts = "-v --tb=short --cov=daq_assettools --cov=src/daq_assettools tests/"  # omitted --cov-report=html to avoid suppressing table to stdout
+
+[tool.coverage.run]
+source = ["daq_assettools"]
+omit = ["tests/*", "scripts/*"]
+
+# * See https://docs.astral.sh/ruff/rules/ for details on Ruff's linting options
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # check for errors using PyFlakes
+    "I",    # best practices for import calls
+    "UP",   # suggestions for code modernization
+    "RUF",  # build in Ruff warnings
+    "R",    # refactoring suggestions
+]
+ignore = [
+    "E501", # Don't enforce line lengths within a linting context
+]
