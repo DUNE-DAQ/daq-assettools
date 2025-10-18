@@ -41,7 +41,7 @@ The tool can take metadata fields from command line as well as from a JSON file.
 
 Examples:
 
-- `assets-add -s ./frames.bin --db-file ./dunedaq-asset-db.sqlite -n frames.bin -f binary --status valid --subsystem readout --label ProtoWIB --description "Used for FE emulation in FakeCardReader"`
+- `assets-add -s ./frames1234.bin --db-file ./dunedaq-asset-db.sqlite -n frames1234.bin -f binary --status valid --subsystem readout --label WIBEth --description "Used for FE emulation in FakeCardReader"`
 
 ### `assets-update`
 
@@ -49,7 +49,7 @@ Use `assets-update` to update certain metadata fields of a file. Similar as othe
 
 Examples:
 
-- `assets-update --subsystem readout --label ProtoWIB --json-string '{"description": "Used for FE emulation in FakeCardReader during Integration Week."}'`
+- `assets-update --subsystem readout --label WIBEth --json-string '{"description": "Used for FE emulation in FakeCardReader during Integration Week."}'`
 - `assets-update -c dc74fe934cfb603d74ab6e54a0af7980 --json-string '{"status": "valid"}'`
 
 ### `assets-retire`
@@ -85,7 +85,7 @@ rsync -vlprt /cvmfs/dunedaq.opensciencegrid.org/assets .
 cd ./assets
 
 # Note that the name, label and description here are just given as examples
-assets-add -s <name of file to add as asset> --db-file ./dunedaq-asset-db.sqlite -n tdeframes.bin -f binary --status valid --subsystem readout --label TDE16 --description "ProtoWIB frames converted to TDE16 frames, using the original frames.bin file, and the file converter from rawdatautils"
+assets-add -s <name of file to add as asset> --db-file ./dunedaq-asset-db.sqlite -n wib_link_67.bin -f binary --status valid --subsystem readout --label WIBEth --description "Other WIBEth files have outdated detector_id fields in DAQEthHeader"
 
 ## Retiring a file, referring to it by its hash
 
