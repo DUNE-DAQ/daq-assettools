@@ -1,10 +1,10 @@
-from daq_assettools.asset_file import AssetFile
-from daq_assettools.asset_database import Database
+import argparse
 import json
 import os
 import shutil
 
-import argparse
+from daq_assettools.asset_database import Database
+
 
 def common_parser():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -114,7 +114,7 @@ def add_assets():
     file_md = {}
     qdict = make_qdict(args)
     if args.json_file is not None:
-        with open(args.json_file, 'r') as jf:
+        with open(args.json_file) as jf:
             file_md = json.load(jf)
     for i in qdict:
         if i == "checksum":
